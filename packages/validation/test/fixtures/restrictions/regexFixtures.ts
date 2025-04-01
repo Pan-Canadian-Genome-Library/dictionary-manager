@@ -1,4 +1,4 @@
-import type { RestrictionRegex } from '@overture-stack/lectern-dictionary';
+import type { RestrictionRegex } from '@dictionary-manager/dictionary';
 export const regexAlphaOnly: RestrictionRegex = '^[A-Za-z]*$';
 export const regexRepeatedText: RestrictionRegex = '(\\w+).*\\1';
 export const regexMTGMana: RestrictionRegex =

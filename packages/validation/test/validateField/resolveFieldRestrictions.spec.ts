@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { ARRAY_TEST_CASE_DEFAULT, type DataRecord } from '@overture-stack/lectern-dictionary';
+import { ARRAY_TEST_CASE_DEFAULT, type DataRecord } from '@dictionary-manager/dictionary';
 import assert from 'assert';
 import { expect } from 'chai';
 import { cloneDeep } from 'lodash';

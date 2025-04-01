@@ -1,4 +1,4 @@
-import type { ArrayTestCase } from '@overture-stack/lectern-dictionary';
+import type { ArrayTestCase } from '@dictionary-manager/dictionary';
 
 /**
  * `ArrayTestCase` values dictate how many results in an array need to be successful in order for

@@ -32,7 +32,7 @@ import {
 	type SchemaField,
 	type SchemaFieldValueType,
 	type UnprocessedDataRecord,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 import type {
 	ParseDictionaryData,
 	ParseDictionaryFailure,

@@ -56,7 +56,7 @@ importers:
 
   apps/server:
     dependencies:
-      '@overture-stack/lectern-dictionary':
+      '@dictionary-manager/dictionary':
         specifier: workspace:^
         version: link:../../packages/dictionary
       ajv:
@@ -159,10 +159,10 @@ importers:
 
   packages/client:
     dependencies:
-      '@overture-stack/lectern-dictionary':
+      '@dictionary-manager/dictionary':
         specifier: workspace:^
         version: link:../dictionary
-      '@overture-stack/lectern-validation':
+      '@dictionary-manager/validation':
         specifier: workspace:^
         version: link:../validation
       cd:
@@ -248,7 +248,7 @@ importers:
 
   packages/validation:
     dependencies:
-      '@overture-stack/lectern-dictionary':
+      '@dictionary-manager/dictionary':
         specifier: workspace:^
         version: link:../dictionary
       lodash:
@@ -267,7 +267,7 @@ importers:
 
   scripts:
     dependencies:
-      '@overture-stack/lectern-dictionary':
+      '@dictionary-manager/dictionary':
         specifier: workspace:^
         version: link:../packages/dictionary
       zod:

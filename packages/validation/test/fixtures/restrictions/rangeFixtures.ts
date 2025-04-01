@@ -1,4 +1,4 @@
-import type { RestrictionRange } from '@overture-stack/lectern-dictionary';
+import type { RestrictionRange } from '@dictionary-manager/dictionary';
 
 export const rangePercent: RestrictionRange = {
 	max: 100,

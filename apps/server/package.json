@@ -1,7 +1,7 @@
 {
-	"name": "@overture-stack/lectern-server",
+	"name": "@dictionary-manager/server",
 	"private": true,
-	"version": "2.0.0-beta.1",
+	"version": "1.0.0",
 	"description": "Overture Data Dictionary Management",
 	"scripts": {
 		"build": "tsc -p tsconfig.build.json",
@@ -12,14 +12,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/overture-stack/lectern.git"
+		"url": "git+https://github.com/Pan-Canadian-Genome-Library/dictionary-manager.git"
 	},
 	"author": "Ontario Institute for Cancer Research",
 	"license": "AGPL-3.0",
 	"bugs": {
-		"url": "https://github.com/overture-stack/lectern/issues"
+		"url": "https://github.com/Pan-Canadian-Genome-Library/dictionary-manager/issues"
 	},
-	"homepage": "https://github.com/overture-stack/lectern#readme",
+	"homepage": "https://github.com/Pan-Canadian-Genome-Library/dictionary-manager#readme",
 	"devDependencies": {
 		"@types/body-parser": "^1.19.5",
 		"@types/errorhandler": "0.0.32",
@@ -39,7 +39,7 @@
 		"zod-to-json-schema": "^3.23.2"
 	},
 	"dependencies": {
-		"@overture-stack/lectern-dictionary": "workspace:^",
+		"@dictionary-manager/dictionary": "workspace:^",
 		"ajv": "^8.17.1",
 		"axios": "^1.7.2",
 		"body-parser": "^1.20.2",

@@ -17,8 +17,8 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import type { DataRecordValue, MatchRuleCodeList } from '@overture-stack/lectern-dictionary';
-import { isNumberArray, isStringArray } from '@overture-stack/lectern-dictionary/dist/utils/typeUtils';
+import type { DataRecordValue, MatchRuleCodeList } from '@dictionary-manager/dictionary';
+import { isNumberArray, isStringArray } from '@dictionary-manager/dictionary/dist/utils/typeUtils';
 
 /**
  * Check if the value (or at least one value from an array) is found in the code list.

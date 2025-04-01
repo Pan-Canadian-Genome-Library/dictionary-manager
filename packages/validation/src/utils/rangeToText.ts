@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { RestrictionRange } from '@overture-stack/lectern-dictionary';
+import { RestrictionRange } from '@dictionary-manager/dictionary';
 
 /**
  * Convert a RestrictionRange object to a simple string representation.

@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { TypeUtils, type SchemaField, type StringFieldRestrictionsObject } from '@overture-stack/lectern-dictionary';
+import { TypeUtils, type SchemaField, type StringFieldRestrictionsObject } from '@dictionary-manager/dictionary';
 
 /**
  * Loop through restrictins and nested conditional restrictions finding every codeList restriction and collect all their

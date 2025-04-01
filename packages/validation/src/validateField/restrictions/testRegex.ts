@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { TypeUtils, type RestrictionRegex } from '@overture-stack/lectern-dictionary';
+import { TypeUtils, type RestrictionRegex } from '@dictionary-manager/dictionary';
 import { invalid, valid } from '../../types/testResult';
 import type { FieldRestrictionSingleValueTestFunction, FieldRestrictionTestFunction } from '../FieldRestrictionTest';
 import { createFieldRestrictionTestForArrays } from './createFieldRestrictionTestForArrays';

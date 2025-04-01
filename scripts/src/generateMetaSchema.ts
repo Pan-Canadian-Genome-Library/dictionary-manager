@@ -20,7 +20,7 @@ import {
 	SchemaNumberField,
 	SchemaStringField,
 	StringFieldRestrictions,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 import fs from 'fs';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 

@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { Dictionary } from '@overture-stack/lectern-dictionary';
+import { Dictionary } from '@dictionary-manager/dictionary';
 
 const output: Dictionary = {
 	name: 'Test Dictionary',

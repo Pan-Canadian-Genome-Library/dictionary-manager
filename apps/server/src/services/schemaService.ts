@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { References, replaceSchemaReferences, Schema } from '@overture-stack/lectern-dictionary';
+import { References, replaceSchemaReferences, Schema } from '@dictionary-manager/dictionary';
 import { ZodError } from 'zod';
 
 export function validateDictionarySchema(

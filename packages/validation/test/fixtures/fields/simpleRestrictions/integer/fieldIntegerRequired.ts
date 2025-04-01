@@ -1,4 +1,4 @@
-import type { SchemaIntegerField } from '@overture-stack/lectern-dictionary';
+import type { SchemaIntegerField } from '@dictionary-manager/dictionary';
 
 export const fieldIntegerRequired = {
 	name: 'integer-required',

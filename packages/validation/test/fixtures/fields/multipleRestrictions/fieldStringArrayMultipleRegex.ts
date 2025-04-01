@@ -1,4 +1,4 @@
-import type { SchemaStringField } from '@overture-stack/lectern-dictionary';
+import type { SchemaStringField } from '@dictionary-manager/dictionary';
 import { regexAlphaOnly, regexRepeatedText } from '../../restrictions/regexFixtures';
 
 /**

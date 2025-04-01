@@ -18,7 +18,7 @@
  */
 
 import axios from 'axios';
-import { ForbiddenError, UnauthorizedError } from '@overture-stack/lectern-dictionary';
+import { ForbiddenError, UnauthorizedError } from '@dictionary-manager/dictionary';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import memoize from 'memoizee';
