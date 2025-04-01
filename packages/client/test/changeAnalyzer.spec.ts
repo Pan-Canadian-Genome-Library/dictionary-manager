@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { DiffUtils } from '@overture-stack/lectern-dictionary';
+import { DiffUtils } from '@dictionary-manager/dictionary';
 import chai from 'chai';
 import { analyzeChanges, ChangeAnalysis } from '../src/changeAnalysis';
 import diffResponse from './fixtures/diffResponse';

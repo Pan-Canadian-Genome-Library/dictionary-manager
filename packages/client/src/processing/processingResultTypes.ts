@@ -24,8 +24,8 @@ import {
 	type RecordValidationError,
 	type ParseSchemaFailureData,
 	type ParseDictionaryData,
-} from '@overture-stack/lectern-validation';
-import { DataRecord, Schema } from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/validation';
+import { DataRecord, Schema } from '@dictionary-manager/dictionary';
 
 export type ProcessingFunction = (schema: Schema, rec: Readonly<DataRecord>, index: number) => any;
 

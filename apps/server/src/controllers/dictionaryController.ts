@@ -23,7 +23,7 @@ import {
 	NotFoundError,
 	Schema,
 	replaceReferences,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 import { Request, Response } from 'express';
 import * as dictionaryService from '../services/dictionaryService';
 

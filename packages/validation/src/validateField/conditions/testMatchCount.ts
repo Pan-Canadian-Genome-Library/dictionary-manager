@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import type { DataRecordValue, MatchRuleCount } from '@overture-stack/lectern-dictionary';
+import type { DataRecordValue, MatchRuleCount } from '@dictionary-manager/dictionary';
 import { testRange } from '../restrictions';
 
 /**

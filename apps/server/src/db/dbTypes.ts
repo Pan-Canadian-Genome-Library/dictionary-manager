@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { DictionaryBase } from '@overture-stack/lectern-dictionary';
+import { DictionaryBase } from '@dictionary-manager/dictionary';
 import { z as zod } from 'zod';
 
 /**

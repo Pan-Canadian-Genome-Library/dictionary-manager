@@ -25,7 +25,7 @@ RUN chown -R ${APP_USER}:${APP_USER} $(npm config get prefix)
 USER ${APP_USER}:${APP_USER}
 
 RUN pnpm install --ignore-scripts
-RUN pnpm nx build @overture-stack/lectern-server
+RUN pnpm nx build @dictionary-manager/server
 
 EXPOSE 3000
 

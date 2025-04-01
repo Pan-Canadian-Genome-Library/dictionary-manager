@@ -23,7 +23,7 @@ import {
 	DictionaryDiffArray,
 	FieldDiff,
 	unknownToString,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 import fetch from 'node-fetch';
 import promiseTools from 'promise-tools';
 import { loggerFor } from '../logger';

@@ -1,7 +1,7 @@
 {
-	"name": "@overture-stack/lectern-server",
+	"name": "@dictionary-manager/server",
 	"private": true,
-	"version": "2.0.0-beta.1",
+	"version": "1.0.0",
 	"description": "Overture Data Dictionary Management",
 	"scripts": {
 		"build": "tsc -p tsconfig.build.json",
@@ -39,7 +39,7 @@
 		"zod-to-json-schema": "^3.23.2"
 	},
 	"dependencies": {
-		"@overture-stack/lectern-dictionary": "workspace:^",
+		"@dictionary-manager/dictionary": "workspace:^",
 		"ajv": "^8.17.1",
 		"axios": "^1.7.2",
 		"body-parser": "^1.20.2",

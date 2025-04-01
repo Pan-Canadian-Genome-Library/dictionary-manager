@@ -26,7 +26,7 @@ import {
 	type DataRecordValue,
 	type RestrictionCondition,
 	type SingleDataValue,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 import { resultForArrayTestCase } from '../../utils/resultForArrayTestCase';
 import { testMatchCount } from './testMatchCount';
 import { testMatchCodeList } from './testMatchCodeList';

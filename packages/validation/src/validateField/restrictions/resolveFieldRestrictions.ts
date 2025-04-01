@@ -24,7 +24,7 @@ import {
 	type DataRecordValue,
 	type SchemaField,
 	type SchemaRestrictions,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 import type { FieldRestrictionRule } from '../FieldRestrictionRule';
 import { testConditionalRestriction } from '../conditions/testConditionalRestriction';
 

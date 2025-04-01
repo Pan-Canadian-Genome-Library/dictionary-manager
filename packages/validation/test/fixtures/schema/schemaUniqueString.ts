@@ -1,4 +1,4 @@
-import { Schema } from '@overture-stack/lectern-dictionary';
+import { Schema } from '@dictionary-manager/dictionary';
 import { fieldStringUnique } from '../fields/schemaRestrictions/fieldStringUnique';
 import assert from 'node:assert';
 import { validateFixture } from '../../testUtils/validateFixture';

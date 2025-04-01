@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { DictionaryDiff, FieldChanges, SchemaField, ValueChange } from '@overture-stack/lectern-dictionary';
+import { DictionaryDiff, FieldChanges, SchemaField, ValueChange } from '@dictionary-manager/dictionary';
 import * as restClient from '../rest';
 import { ChangeAnalysis, RestrictionChanges } from './changeAnalysisTypes';
 

@@ -1,4 +1,4 @@
-import type { SchemaNumberField } from '@overture-stack/lectern-dictionary';
+import type { SchemaNumberField } from '@dictionary-manager/dictionary';
 
 export const fieldNumberRequired = {
 	name: 'number-required',

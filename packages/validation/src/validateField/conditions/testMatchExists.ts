@@ -22,7 +22,7 @@ import {
 	type DataRecordValue,
 	type MatchRuleExists,
 	type SingleDataValue,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 
 const valueExists = (value: SingleDataValue) => {
 	if (value === undefined) {

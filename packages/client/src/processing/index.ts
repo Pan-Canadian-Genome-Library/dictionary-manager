@@ -17,8 +17,8 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { DataRecord, Dictionary, Schema, UnprocessedDataRecord } from '@overture-stack/lectern-dictionary';
-import * as validation from '@overture-stack/lectern-validation';
+import { DataRecord, Dictionary, Schema, UnprocessedDataRecord } from '@dictionary-manager/dictionary';
+import * as validation from '@dictionary-manager/validation';
 import {
 	SchemaProcessingResult,
 	type DictionaryProcessingResult,

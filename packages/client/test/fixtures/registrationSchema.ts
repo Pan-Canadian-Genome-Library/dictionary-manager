@@ -1,4 +1,4 @@
-import { Dictionary } from '@overture-stack/lectern-dictionary';
+import { Dictionary } from '@dictionary-manager/dictionary';
 
 const dictionary: Dictionary = {
 	schemas: [

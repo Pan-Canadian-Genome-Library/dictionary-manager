@@ -22,7 +22,7 @@ import type {
 	RestrictionCodeList,
 	RestrictionRange,
 	RestrictionRegex,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 
 export type FieldRestrictionRuleCodeList = {
 	type: typeof FieldRestrictionTypes.codeList;

@@ -28,8 +28,8 @@ export {
 	Schema,
 	SchemaField,
 	Result,
-} from '@overture-stack/lectern-dictionary';
-import * as _validation from '@overture-stack/lectern-validation';
+} from '@dictionary-manager/dictionary';
+import * as _validation from '@dictionary-manager/validation';
 
 // Exporting all result types used in the parsing and validation functions
 export type {
@@ -51,7 +51,7 @@ export type {
 	ParseSchemaResult,
 	ParseRecordFailureData,
 	ParseRecordResult,
-} from '@overture-stack/lectern-validation';
+} from '@dictionary-manager/validation';
 
 import * as _processing from './processing';
 export * as rest from './rest';

@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { Schema } from '@overture-stack/lectern-dictionary';
+import { Schema } from '@dictionary-manager/dictionary';
 
 export default {
 	name: 'schema_tests',

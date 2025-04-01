@@ -24,7 +24,7 @@ import {
 	NotFoundError,
 	Schema,
 	VersionUtils,
-} from '@overture-stack/lectern-dictionary';
+} from '@dictionary-manager/dictionary';
 import * as immer from 'immer';
 import { omit } from 'lodash';
 import logger from '../config/logger';

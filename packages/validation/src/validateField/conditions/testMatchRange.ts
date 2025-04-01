@@ -17,8 +17,8 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { type DataRecordValue, type MatchRuleRange } from '@overture-stack/lectern-dictionary';
-import { isNumberArray } from '@overture-stack/lectern-dictionary/dist/utils/typeUtils';
+import { type DataRecordValue, type MatchRuleRange } from '@dictionary-manager/dictionary';
+import { isNumberArray } from '@dictionary-manager/dictionary/dist/utils/typeUtils';
 import { testRange } from '../restrictions';
 
 export const testMatchRange = (range: MatchRuleRange, value: DataRecordValue): boolean => {

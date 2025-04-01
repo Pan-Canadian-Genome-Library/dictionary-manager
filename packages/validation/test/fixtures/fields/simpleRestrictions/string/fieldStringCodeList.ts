@@ -1,4 +1,4 @@
-import type { SchemaStringField } from '@overture-stack/lectern-dictionary';
+import type { SchemaStringField } from '@dictionary-manager/dictionary';
 import { codeListString } from '../../../restrictions/codeListsFixtures';
 
 export const fieldStringCodeList = {
