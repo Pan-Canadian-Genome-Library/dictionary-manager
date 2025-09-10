@@ -110,7 +110,7 @@ const refreshAuthZServiceToken = async () => {
 export const fetchUserData = async (token: string) => {
 	const response = await fetchWithServiceToken(`/user/me`, token);
 
-	// This is only triggered if the second fetch from fetchAuthZResource returns an error
+	// This is only triggered if the second fetch from fetchWithServiceToken returns an error
 	if (!response.ok) {
 		const errorResponse: UserDataResponseErrorType = await response.json();
 
