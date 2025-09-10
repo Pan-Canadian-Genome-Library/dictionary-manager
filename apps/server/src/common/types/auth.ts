@@ -18,5 +18,8 @@
  * */
 
 export type UserDataResponseErrorType = {
-	error: string;
+	type: string;
+	title: string;
+	detail: string;
+	status: number;
 };
