@@ -35,7 +35,7 @@ let serviceToken: string | undefined = undefined;
  * @param options optional additional request configurations for the fetch call
  *
  */
-const fetchAuthZResource = async (resource: string, token: string, options?: RequestInit) => {
+const fetchWithServiceToken = async (resource: string, token: string, options?: RequestInit) => {
 	// Created this function to prevent repeat usage of try/catch
 	async function fetchFromAuthZ() {
 		const { AUTHZ_ENDPOINT, SERVICE_ID } = authConfig;
@@ -54,6 +54,11 @@ const fetchAuthZResource = async (resource: string, token: string, options?: Req
 			throw new InternalServerError(`Bad request: Something went wrong fetching from authz service`);
 		}
 	}
+	// If the serviceToken doesn't exist, then call refresh service token
+	if (serviceToken === undefined) {
+		await refreshAuthZServiceToken();
+	}
+
 	const firstResponse = await fetchFromAuthZ();
 	// CASE-1: Bad bearer token
 	if (!firstResponse.ok && firstResponse.status === 401) {
@@ -103,11 +108,7 @@ const refreshAuthZServiceToken = async () => {
  * @returns validated object of UserDataResponse
  */
 export const fetchUserData = async (token: string) => {
-	// If the serviceToken doesn't exist, then call refresh service token
-	if (serviceToken === undefined) {
-		await refreshAuthZServiceToken();
-	}
-	const response = await fetchAuthZResource(`/user/me`, token);
+	const response = await fetchWithServiceToken(`/user/me`, token);
 
 	// This is only triggered if the second fetch from fetchAuthZResource returns an error
 	if (!response.ok) {
