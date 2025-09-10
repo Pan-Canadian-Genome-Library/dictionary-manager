@@ -19,7 +19,7 @@
 
 import { z } from 'zod';
 import dotenv from 'dotenv';
-import EnvironmentConfigError from './EnvironmentConfigError';
+import EnvironmentConfigError from './EnvironmentConfigError.js';
 
 dotenv.config();
 const enabled = process.env.AUTH_ENABLED === 'true';

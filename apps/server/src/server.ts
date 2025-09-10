@@ -18,11 +18,11 @@
  */
 
 import mongoose from 'mongoose';
-import App from './app';
-import { setDBStatus, Status } from './app-health';
-import { getAppConfig } from './config/appConfig';
-import logger from './config/logger';
-import { constructMongoUri } from './utils/mongo';
+import App from './app.js';
+import { setDBStatus, Status } from './app-health.js';
+import { getAppConfig } from './config/appConfig.js';
+import logger from './config/logger.js';
+import { constructMongoUri } from './utils/mongo.js';
 
 (async () => {
 	const appConfig = await getAppConfig();

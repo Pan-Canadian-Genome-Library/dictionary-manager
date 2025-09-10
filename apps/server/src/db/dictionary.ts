@@ -18,9 +18,9 @@
  */
 
 import { Dictionary } from '@overture-stack/lectern-dictionary';
-import { omit } from 'lodash';
+import { omit } from 'lodash-es';
 import mongoose from 'mongoose';
-import type { DictionaryDocument, DictionaryDocumentSummary } from './dbTypes';
+import type { DictionaryDocument, DictionaryDocumentSummary } from './dbTypes.js';
 
 export const DictionaryModel = mongoose.model(
 	'Dictionary',

@@ -18,8 +18,8 @@
  */
 import { BadRequestError, DictionaryDiffArray, DiffUtils, replaceReferences } from '@overture-stack/lectern-dictionary';
 import { Router } from 'express';
-import * as dictionaryService from '../services/dictionaryService';
-import { wrapAsync } from './wrappers';
+import * as dictionaryService from '../services/dictionaryService.js';
+import { wrapAsync } from './wrappers.js';
 
 const router = Router();
 
