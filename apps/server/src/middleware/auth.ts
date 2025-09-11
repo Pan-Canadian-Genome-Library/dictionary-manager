@@ -53,7 +53,6 @@ export const authAdminMiddleware = () => {
 					return next(new ForbiddenError('Unauthorized: You do not have access to this resource'));
 				}
 
-				// return next();
 				const routePromise: any = fn(req, res, next);
 				if (routePromise.catch) {
 					routePromise.catch(next);
