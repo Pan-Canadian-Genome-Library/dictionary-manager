@@ -127,8 +127,8 @@ docker run --name lectern-mongo \
    - `AUTH_PROVIDER_HOST`: Authentication API URL (CILogon)
    - `AUTH_CLIENT_ID`: Authentication client Id
    - `AUTH_CLIENT_SECRET`: Authentication secret
-   - `SERVICE_ID`: AUTHZ service id for application
-   - `SERVICE_UUID`: AUTHZ unique id to generate tokens
+   - `AUTHZ_SERVICE_ID`: AUTHZ service id for application
+   - `AUTHZ_SERVICE_UUID`: AUTHZ unique id to generate tokens
    - `CORS_ALLOWED_ORIGINS`: Comma-separated list of allowed origins
 
    **Vault Integration (Optional)**

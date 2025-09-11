@@ -38,12 +38,12 @@ let serviceToken: string | undefined = undefined;
 const fetchWithServiceToken = async (resource: string, token: string, options?: RequestInit) => {
 	// Created this function to prevent repeat usage of try/catch
 	async function fetchFromAuthZ() {
-		const { AUTHZ_ENDPOINT, SERVICE_ID } = authConfig;
+		const { AUTHZ_ENDPOINT, AUTHZ_SERVICE_ID } = authConfig;
 		const url = urlJoin(AUTHZ_ENDPOINT || '', resource);
 		const headers = new Headers({
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
-			'X-Service-ID': `${SERVICE_ID}`,
+			'X-Service-ID': `${AUTHZ_SERVICE_ID}`,
 			'X-Service-Token': `${serviceToken}`,
 		});
 
@@ -82,17 +82,17 @@ const fetchWithServiceToken = async (resource: string, token: string, options?: 
  * Function to fetch authZ service token to append to header requirement X-Service-Token
  */
 const refreshAuthZServiceToken = async () => {
-	const { AUTHZ_ENDPOINT, SERVICE_ID, SERVICE_UUID } = authConfig;
+	const { AUTHZ_ENDPOINT, AUTHZ_SERVICE_ID, AUTHZ_SERVICE_UUID } = authConfig;
 
 	try {
-		const url = urlJoin(AUTHZ_ENDPOINT || '', `/service/${SERVICE_ID}/verify`);
+		const url = urlJoin(AUTHZ_ENDPOINT || '', `/service/${AUTHZ_SERVICE_ID}/verify`);
 		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				service_uuid: SERVICE_UUID,
+				service_uuid: AUTHZ_SERVICE_UUID,
 			}),
 		});
 		const tokenResponse = await response.json();
