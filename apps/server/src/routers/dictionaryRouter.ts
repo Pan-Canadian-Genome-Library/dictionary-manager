@@ -31,7 +31,7 @@ router.get('', wrapAsync(dictionaryController.listDictionaries));
 /**
  * Create Dictionary
  */
-router.post('', authAdminMiddleware(), wrapAsyncAuth(dictionaryController.createDictionary));
+router.post('', wrapAsyncAuth(dictionaryController.createDictionary));
 
 /**
  * Get Dictionary by ID
@@ -41,12 +41,12 @@ router.get('/:dictId', wrapAsync(dictionaryController.getDictionary));
 /**
  * Add Schema to Dictionary
  */
-router.post('/:dictId/schemas', authAdminMiddleware(), wrapAsyncAuth(dictionaryController.addSchema));
+router.post('/:dictId/schemas', wrapAsyncAuth(dictionaryController.addSchema));
 
 /**
  * Update Schema for Dictionary
  */
-router.put('/:dictId/schemas', authAdminMiddleware(), wrapAsyncAuth(dictionaryController.updateSchema));
+router.put('/:dictId/schemas', wrapAsyncAuth(dictionaryController.updateSchema));
 
 /**
  * Get Schema from Dictionary

@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { ForbiddenError, UnauthorizedError } from '@overture-stack/lectern-dictionary';
 import logger from '../config/logger.js';
 import { fetchUserData } from '../external/pcglAuthZClient.js';
@@ -33,30 +33,35 @@ import { authConfig } from '../config/authConfig.js';
  */
 export const authAdminMiddleware = () => {
 	const { enabled } = authConfig;
-	return async (req: Request, _: Response, next: NextFunction) => {
-		try {
-			// If auth is disabled, then skip fetching user information
-			if (!enabled) {
-				return next();
+	return (fn: RequestHandler): RequestHandler => {
+		return async (req: Request, res: Response, next: NextFunction) => {
+			try {
+				// If auth is disabled, then skip fetching user information
+				if (!enabled) {
+					return next();
+				}
+
+				const token = extractAccessTokenFromHeader(req);
+
+				if (!token) {
+					return next(new UnauthorizedError('Unauthorized: No access token provided'));
+				}
+
+				const result = await fetchUserData(token);
+
+				if (!result.user?.isAdmin) {
+					return next(new ForbiddenError('Unauthorized: You do not have access to this resource'));
+				}
+
+				const routePromise: any = fn(req, res, next);
+				if (routePromise.catch) {
+					routePromise.catch(next);
+				}
+			} catch (error) {
+				logger.error(error);
+				return next(error);
 			}
-
-			const token = extractAccessTokenFromHeader(req);
-
-			if (!token) {
-				throw new UnauthorizedError('Unauthorized: No access token provided');
-			}
-
-			const result = await fetchUserData(token);
-
-			if (!result.user?.isAdmin) {
-				throw new ForbiddenError('Unauthorized: You do not have access to this resource');
-			}
-
-			return next();
-		} catch (error) {
-			logger.error(error);
-			return next(error);
-		}
+		};
 	};
 };
 

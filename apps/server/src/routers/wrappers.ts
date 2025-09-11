@@ -18,7 +18,7 @@
  */
 
 import { RequestHandler } from 'express';
-import egoRequestWrapper from '../external/ego.js';
+import { authAdminMiddleware } from '../middleware/auth.js';
 
 /**
  * Decorator to handle errors from async express route handlers
@@ -34,4 +34,4 @@ export const wrapAsync = <PathParams, ResponseBody, RequestBody, Query, Locals e
 	};
 };
 
-export const wrapAsyncAuth = process.env.AUTH_ENABLED === 'true' ? egoRequestWrapper() : wrapAsync;
+export const wrapAsyncAuth = process.env.AUTH_ENABLED === 'true' ? authAdminMiddleware() : wrapAsync;

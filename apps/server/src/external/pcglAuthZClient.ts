@@ -25,6 +25,8 @@ import { Groups, userDataResponseSchema, UserDataResponseSchemaType } from '../c
 import { authConfig } from '../config/authConfig.js';
 import logger from '../config/logger.js';
 
+let serviceToken: string | undefined = undefined;
+
 /**
  *  Function to perform fetch requests to AUTHZ service
  *
@@ -33,19 +35,70 @@ import logger from '../config/logger.js';
  * @param options optional additional request configurations for the fetch call
  *
  */
-const fetchAuthZResource = async (resource: string, token: string, options?: RequestInit) => {
-	const { AUTHZ_ENDPOINT } = authConfig;
+const fetchWithServiceToken = async (resource: string, token: string, options?: RequestInit) => {
+	// Created this function to prevent repeat usage of try/catch
+	async function fetchFromAuthZ() {
+		const { AUTHZ_ENDPOINT, AUTHZ_SERVICE_ID } = authConfig;
+		const url = urlJoin(AUTHZ_ENDPOINT || '', resource);
+		const headers = new Headers({
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+			'X-Service-ID': `${AUTHZ_SERVICE_ID}`,
+			'X-Service-Token': `${serviceToken}`,
+		});
 
-	const url = urlJoin(AUTHZ_ENDPOINT || '', resource);
-	const headers = new Headers({
-		Authorization: `Bearer ${token}`,
-		'Content-Type': 'application/json',
-	});
+		try {
+			return await fetch(url, { headers, ...options });
+		} catch (error) {
+			logger.error(`[AUTHZ]: Something went wrong fetching authz service. ${error}`);
+			throw new InternalServerError(`Bad request: Something went wrong fetching from authz service`);
+		}
+	}
+	// If the serviceToken doesn't exist, then call refresh service token
+	if (serviceToken === undefined) {
+		await refreshAuthZServiceToken();
+	}
+
+	const firstResponse = await fetchFromAuthZ();
+	// CASE-1: Bad bearer token
+	if (!firstResponse.ok && firstResponse.status === 401) {
+		logger.error(`[AUTHZ]: Bearer token is invalid`);
+
+		throw new ForbiddenError(
+			'Something went wrong while verifying PCGL user account information, please try again later.',
+		);
+	}
+	// CASE-2: Bad serviceToken
+	// Trigger refresh service token and recall with the new token
+	if (!firstResponse.ok && firstResponse.status === 403) {
+		await refreshAuthZServiceToken();
+		return await fetchFromAuthZ();
+	}
+
+	return firstResponse;
+};
+
+/**
+ * Function to fetch authZ service token to append to header requirement X-Service-Token
+ */
+const refreshAuthZServiceToken = async () => {
+	const { AUTHZ_ENDPOINT, AUTHZ_SERVICE_ID, AUTHZ_SERVICE_UUID } = authConfig;
 
 	try {
-		return await fetch(url, { headers, ...options });
+		const url = urlJoin(AUTHZ_ENDPOINT || '', `/service/${AUTHZ_SERVICE_ID}/verify`);
+		const response = await fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				service_uuid: AUTHZ_SERVICE_UUID,
+			}),
+		});
+		const tokenResponse = await response.json();
+		serviceToken = tokenResponse.token;
 	} catch (error) {
-		logger.error(`[AUTHZ]: Something went wrong fetching authz service. ${error}`);
+		logger.error(`[AUTHZ]: Something went wrong fetching authz service token. ${error}`);
 		throw new InternalServerError(`Bad request: Something went wrong fetching from authz service`);
 	}
 };
@@ -55,26 +108,24 @@ const fetchAuthZResource = async (resource: string, token: string, options?: Req
  * @returns validated object of UserDataResponse
  */
 export const fetchUserData = async (token: string) => {
-	const response = await fetchAuthZResource(`/user/me`, token);
+	const response = await fetchWithServiceToken(`/user/me`, token);
 
+	// This is only triggered if the second fetch from fetchWithServiceToken returns an error
 	if (!response.ok) {
 		const errorResponse: UserDataResponseErrorType = await response.json();
 
-		logger.error(`[AUTHZ]: Unable to verify user response from AUTHZ. ${errorResponse}`);
-
-		const responseMessage =
-			'Something went wrong while verifying PCGL user account information, please try again later.';
+		logger.error(`[AUTHZ]: Unable to verify user response from AUTHZ. ${errorResponse.error}`);
 
 		switch (response.status) {
-			case 401:
-			case 403:
-				throw new ForbiddenError(responseMessage);
 			case 404:
 				throw new NotFoundError('This account is currently not associated within the PCGL project.');
 			default:
-				throw new InternalServerError(responseMessage);
+				throw new InternalServerError(
+					'Something went wrong while verifying PCGL user account information, please try again later.',
+				);
 		}
 	}
+
 	try {
 		const result: UserDataResponseSchemaType = await response.json();
 		const responseValidation = userDataResponseSchema.safeParse(result);
