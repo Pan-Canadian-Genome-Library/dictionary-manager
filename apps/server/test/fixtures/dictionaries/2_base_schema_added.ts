@@ -18,8 +18,8 @@
  */
 
 import { Dictionary } from '@overture-stack/lectern-dictionary';
-import primitivesSchema from '../schemas/primitives';
-import additionalSchema from '../schemas/schemaChangesBase';
+import primitivesSchema from '../schemas/primitives.js';
+import additionalSchema from '../schemas/schemaChangesBase.js';
 const dictionary: Dictionary = {
 	name: 'Simple Dictionary',
 	version: '2.0',

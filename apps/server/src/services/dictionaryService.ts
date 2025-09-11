@@ -29,7 +29,7 @@ import {
 import * as immer from 'immer';
 import { omit } from 'lodash-es';
 import logger from '../config/logger.js';
-import * as DictionaryRepo from '../db/dictionary.js';
+import { default as DictionaryRepo } from '../db/dictionary.js';
 import { validateDictionarySchema } from '../services/schemaService.js';
 import type { DictionaryDocument, DictionaryDocumentSummary } from '../db/dbTypes.js';
 

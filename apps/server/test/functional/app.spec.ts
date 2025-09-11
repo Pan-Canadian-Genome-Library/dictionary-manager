@@ -18,8 +18,8 @@
  */
 
 import { expect } from 'chai';
-import App from '../../src/app';
-import { AppConfig } from '../../src/config/appConfig';
+import App from '../../src/app.js';
+import { AppConfig } from '../../src/config/appConfig.js';
 
 describe('Test injection of config into Express App', () => {
 	it('Should have correct port and api docs path set', () => {

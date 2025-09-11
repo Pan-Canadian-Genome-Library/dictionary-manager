@@ -22,7 +22,7 @@ import { omit } from 'lodash-es';
 import mongoose from 'mongoose';
 import type { DictionaryDocument, DictionaryDocumentSummary } from './dbTypes.js';
 
-export const DictionaryModel = mongoose.model(
+const DictionaryModel = mongoose.model(
 	'Dictionary',
 	new mongoose.Schema<DictionaryDocument>(
 		{
@@ -43,7 +43,7 @@ export const DictionaryModel = mongoose.model(
  * @param id
  * @returns
  */
-export const findById = async (id: string): Promise<DictionaryDocument | null> => {
+const findById = async (id: string): Promise<DictionaryDocument | null> => {
 	const doc = await DictionaryModel.findOne({ _id: id }).lean(true);
 	return doc ? stripExtras(doc) : doc;
 };
@@ -53,7 +53,7 @@ export const findById = async (id: string): Promise<DictionaryDocument | null> =
  * @param id
  * @returns
  */
-export const findByNameAndVersion = async (name: string, version: string): Promise<DictionaryDocument | null> => {
+const findByNameAndVersion = async (name: string, version: string): Promise<DictionaryDocument | null> => {
 	const doc = await DictionaryModel.findOne({ name: name, version: version }).lean(true);
 	return doc ? stripExtras(doc) : doc;
 };
@@ -62,7 +62,7 @@ export const findByNameAndVersion = async (name: string, version: string): Promi
  * Fetch all DBs, returning only the name, version, and description of each Dictionary
  * @returns
  */
-export const listAll = async (): Promise<DictionaryDocumentSummary[]> => {
+const listAll = async (): Promise<DictionaryDocumentSummary[]> => {
 	return DictionaryModel.find({}, 'name version description createdAt').lean(true);
 };
 
@@ -71,7 +71,7 @@ export const listAll = async (): Promise<DictionaryDocumentSummary[]> => {
  * @param name
  * @returns
  */
-export const listByName = async (name: string): Promise<DictionaryDocument[]> => {
+const listByName = async (name: string): Promise<DictionaryDocument[]> => {
 	const docs = await DictionaryModel.find({ name });
 	return docs.map((doc) => stripExtras(doc.toObject()));
 };
@@ -82,7 +82,7 @@ export const listByName = async (name: string): Promise<DictionaryDocument[]> =>
  * @param dictionary
  * @returns
  */
-export const addDictionary = async (dictionary: Dictionary): Promise<DictionaryDocument> => {
+const addDictionary = async (dictionary: Dictionary): Promise<DictionaryDocument> => {
 	const dict = new DictionaryModel(dictionary);
 	const saved = await dict.save();
 	return stripExtras(saved.toObject());
@@ -92,3 +92,12 @@ export const addDictionary = async (dictionary: Dictionary): Promise<DictionaryD
  * Remove the mongo version property __v from the response object
  */
 const stripExtras = (doc: DictionaryDocument) => omit(doc, '__v');
+
+export default {
+	DictionaryModel,
+	findById,
+	findByNameAndVersion,
+	listAll,
+	listByName,
+	addDictionary,
+};
