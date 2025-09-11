@@ -107,11 +107,11 @@ All available configurations can be found in the example .env file: [`./.env.exa
 | OPENAPI_PATH         | No                             | String       | `/api-docs` | Path to Swagger UI with API documentation.                                                                                                              |
 | PORT                 | No                             | Number       | `3000`      | Port Lectern Server API will listen to.                                                                                                                 |
 | CORS_ALLOWED_ORIGINS | No                             | String[]     | -           | List of domains that will be allowed by CORS. Multiple domains can be listed, separated by commas. Example: `http://localhost:5173,https://example.com` |
-|                      |                                |              |             |                                                                                                                                                         |
 | AUTH_ENABLED         | No                             | Boolean      | `false`     | Set to `true` to enable Authorization restrictions on all endpoints that modify data. For more details see [Authorization](#authorization).             |
-| EGO_API              | When `AUTH_ENABLED` is `true`  | String (URL) | -           | URL to the EGO API root. See [Auth Configuration](#auth-configuration).                                                                                 |
-| SCOPE                | When `AUTH_ENABLED` is `true`  | String       | -           | Policy name to look for in JWT Scope. See [Auth Configuration](#auth-configuration).                                                                    |
-| AUTHZ_ENDPOINT       | When `AUTH_ENABLED` is `true`  | String (URL) | -           | Authz endpoint to query for authorization.                                                                                                              |
+| SERVICE_ID           | When `AUTH_ENABLED` is `true`  | String       | -           | Service ID configured for your app from AuthZ.                                                                                                          |
+| SERVICE_UUID         | When `AUTH_ENABLED` is `true`  | String       | -           | Unique Id provided by AuthZ needed for the creation of verification tokens.                                                                             |
+| AUTHZ_ENDPOINT       | When `AUTH_ENABLED` is `true`  | String (URL) | -           | Authz URL to query for authorization.                                                                                                                   |
+| AUTH_PROVIDER_HOST   | When `AUTH_ENABLED` is `true`  | String (URL) | -           | Authentication API URL (CILogon) service.                                                                                                               |
 | AUTH_CLIENT_ID       | When `AUTH_ENABLED` is `true`  | String       | -           | Client ID used for authentication service.                                                                                                              |
 | AUTH_CLIENT_SECRET   | When `AUTH_ENABLED` is `true`  | String       | -           | Client secret used for authentication service.                                                                                                          |
 | AUTHZ_GROUP_ADMIN    | When `AUTH_ENABLED` is `true`  | String       | -           | Group name used to determine administrative privileges.                                                                                                 |
@@ -136,13 +136,8 @@ For Lectern Server, all MonogDB Configuration properties can be provided by Vaul
 
 ## Authorization
 
-Lectern handles Authorization for protected endpoints through integration with [Overture's Ego](https://www.overture.bio/products/ego/) authorization service. Ego provides a standard OAuth2 style JWT access token for Authenticated users, and this JWT includes scopes with a list of permissions. Lectern's protected endpoints expect this JWT as a Bearer token.
-
-When Auth is enabled in Lectern, any endpoint that modifies schema data is protected.
-
-To use a protected endpoint, a request must contain a valid JWT Bearer Token, validated against the Public Key of the Auth server. Lectern is expecting the content of the JWT to match Ego's User JWT structure. Importantly, there needs to be an array of permissions with the `context.scope` of the JWT. Ego permissions are structure like `<SCOPE>.<POLICY>`, and for Lectern we require the `POLICY=WRITE`. The Specific `SCOPE` would typically be `lectern` but is configurable.
-
-If a Valid JWT is received with the expected permission then the request will be accepted.
+Data dictionary handles Authorization for protected endpoints through a different method in comparison to Lecterns [Overture's Ego](https://www.overture.bio/products/ego/) authorization service.
+Data dictionary handles auth with two services; CILogon to handle authentication and AuthZ to handle authorization of protected endpoints.
 
 > **Attention:**
 >
@@ -150,10 +145,6 @@ If a Valid JWT is received with the expected permission then the request will be
 >
 > Any instance of Lectern running in a production environment should have authorization enabled.
 
-### Auth Configuration
+### Enabling Authentication/Authorization
 
-To enable authorization in lectern set `AUTH_ENABLED` to `true` in your environment variables.
-
-The `EGO_API` environment variable should be set to the API route of the OAuth2 server. Following OAuth2 standards, Lectern will request the public encryption key from this server at the path `{{EGO_API}}//oauth/token/public_key`.
-
-The `SCOPE` environment variable can be any string. Lectern will look for a permission in the JWT scope that matches the pattern `{{SCOPE}}.WRITE` in an array at the path `context.scope`.
+For production environments, to enable Auth add the following defined in section above `Configuration Variables` as environmental variables.

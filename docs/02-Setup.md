@@ -110,27 +110,28 @@ docker run --name lectern-mongo \
    <summary><strong>Environment Variables Reference</strong></summary>
 
    **Express Configuration**
-
    - `PORT`: Server port (default: 3000)
    - `OPENAPI_PATH`: Swagger UI path (default: /api-docs)
 
    **MongoDB Configuration**
-
    - `MONGO_HOST`: Database hostname (default: localhost)
    - `MONGO_PORT`: Database port (default: 27017)
    - `MONGO_DB`: Database name (default: lectern)
    - `MONGO_USER`: Database username (optional)
    - `MONGO_PASS`: Database password (optional)
 
-   **Authentication (Optional)**
-
+   **Authentication/Authorization (Optional)**
    - `AUTH_ENABLED`: Enable JWT-based authorization (default: false)
-   - `EGO_API`: EGO API URL for JWT validation
-   - `SCOPE`: Required policy name in JWT scope
+   - `AUTHZ_ENDPOINT`: AUTHZ API URL for authorization
+   - `AUTHZ_GROUP_ADMIN`: User group for administrators
+   - `AUTH_PROVIDER_HOST`: Authentication API URL (CILogon)
+   - `AUTH_CLIENT_ID`: Authentication client Id
+   - `AUTH_CLIENT_SECRET`: Authentication secret
+   - `SERVICE_ID`: AUTHZ service id for application
+   - `SERVICE_UUID`: AUTHZ unique id to generate tokens
    - `CORS_ALLOWED_ORIGINS`: Comma-separated list of allowed origins
 
    **Vault Integration (Optional)**
-
    - `VAULT_ENABLED`: Enable HashiCorp Vault integration (default: false)
    - `VAULT_URL`: Vault server URL
    - `VAULT_SECRETS_PATH`: Path to secrets in Vault
@@ -196,13 +197,9 @@ If you encounter any issues or have questions about our API, please don't hesita
 
 ## Advanced Configuration
 
-### Enabling Authorization
+### Enabling Authentication/Authorization
 
-For production environments, enable JWT-based authorization:
-
-1. Set `AUTH_ENABLED=true` in your `.env` file
-2. Configure `EGO_API` to point to your Ego authorization service
-3. Set the appropriate `SCOPE` for your permissions
+For production environments, to enable Auth add the following defined in section above `Authentication/Authorization (Optional)` as an environmental variables.
 
 ### Vault Integration
 
