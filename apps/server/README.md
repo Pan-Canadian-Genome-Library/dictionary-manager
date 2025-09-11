@@ -136,8 +136,8 @@ For Lectern Server, all MonogDB Configuration properties can be provided by Vaul
 
 ## Authorization
 
-Data dictionary handles Authorization for protected endpoints through a different method in comparison to Lecterns [Overture's Ego](https://www.overture.bio/products/ego/) authorization service.
-Data dictionary handles auth with two services; CILogon to handle authentication and AuthZ to handle authorization of protected endpoints.
+Dictionary-Manager handles Authorization for protected endpoints through a different method in comparison to Lectern's [Overture's Ego](https://www.overture.bio/products/ego/) authorization service.
+Dictionary-Manager handles auth with two services; CILogon to handle authentication and AuthZ to handle authorization of protected endpoints.
 
 > **Attention:**
 >
