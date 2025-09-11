@@ -17,7 +17,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 import { Router } from 'express';
-import { dbHealth, Status } from '../app-health';
+import { dbHealth, Status } from '../app-health.js';
 
 const router = Router();
 

@@ -21,13 +21,13 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import * as swaggerUi from 'swagger-ui-express';
 
-import { AppConfig } from './config/appConfig';
-import logger from './config/logger';
-import * as swagger from './config/swagger.json';
-import dictionaryRouter from './routers/dictionaryRouter';
-import diffRouter from './routers/diffRouter';
-import healthRouter from './routers/healthRouter';
-import { errorHandler } from './utils/errorHandler';
+import { AppConfig } from './config/appConfig.js';
+import logger from './config/logger.js';
+import { swagger } from './config/loadJsonFile.js';
+import dictionaryRouter from './routers/dictionaryRouter.js';
+import diffRouter from './routers/diffRouter.js';
+import healthRouter from './routers/healthRouter.js';
+import { errorHandler } from './utils/errorHandler.js';
 
 const App = (config: AppConfig): Express => {
 	// Create Express server with mongoConfig

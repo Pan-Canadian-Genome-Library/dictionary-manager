@@ -17,13 +17,13 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import urlJoin from 'url-join';
 import { InternalServerError, ForbiddenError, NotFoundError } from '@overture-stack/lectern-dictionary';
 
-import { UserDataResponseErrorType } from '../common/types/auth';
-import { Groups, userDataResponseSchema, UserDataResponseSchemaType } from '../common/validation/auth-validation';
-import { authConfig } from '../config/authConfig';
-import logger from '../config/logger';
-import urlJoin from 'url-join';
+import { UserDataResponseErrorType } from '../common/types/auth.js';
+import { Groups, userDataResponseSchema, UserDataResponseSchemaType } from '../common/validation/auth-validation.js';
+import { authConfig } from '../config/authConfig.js';
+import logger from '../config/logger.js';
 
 /**
  *  Function to perform fetch requests to AUTHZ service

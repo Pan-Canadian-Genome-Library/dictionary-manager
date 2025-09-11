@@ -18,7 +18,7 @@
  */
 
 import { NextFunction, Request, Response } from 'express';
-import logger from '../config/logger';
+import logger from '../config/logger.js';
 
 export const errorHandler = (err: Error, _req: Request, res: Response, next: NextFunction) => {
 	if (res.headersSent) {

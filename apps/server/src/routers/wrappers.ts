@@ -18,7 +18,7 @@
  */
 
 import { RequestHandler } from 'express';
-import egoRequestWrapper from '../external/ego';
+import egoRequestWrapper from '../external/ego.js';
 
 /**
  * Decorator to handle errors from async express route handlers
