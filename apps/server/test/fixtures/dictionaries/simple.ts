@@ -18,7 +18,7 @@
  */
 
 import { Dictionary } from '@overture-stack/lectern-dictionary';
-import primitivesSchema from '../schemas/primitives';
+import primitivesSchema from '../schemas/primitives.js';
 export default {
 	name: 'Simple Dictionary',
 	version: '1.0',

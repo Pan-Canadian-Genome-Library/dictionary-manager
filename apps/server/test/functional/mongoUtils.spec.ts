@@ -18,8 +18,8 @@
  */
 
 import { expect } from 'chai';
-import { constructMongoUri } from '../../src/utils/mongo';
-import { AppConfig } from '../../src/config/appConfig';
+import { constructMongoUri } from '../../src/utils/mongo.js';
+import { AppConfig } from '../../src/config/appConfig.js';
 
 describe('Test mongo URI construction', () => {
 	it('Should construct valid mongo connection URI', () => {

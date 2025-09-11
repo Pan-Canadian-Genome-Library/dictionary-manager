@@ -19,9 +19,9 @@
 
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { ForbiddenError, UnauthorizedError } from '@overture-stack/lectern-dictionary';
-import logger from '../config/logger';
-import { fetchUserData } from '../external/pcglAuthZClient';
-import { authConfig } from '../config/authConfig';
+import logger from '../config/logger.js';
+import { fetchUserData } from '../external/pcglAuthZClient.js';
+import { authConfig } from '../config/authConfig.js';
 
 /**
  * Admin authorization middleware

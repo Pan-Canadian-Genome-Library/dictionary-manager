@@ -18,7 +18,7 @@
  */
 
 import * as dotenv from 'dotenv';
-import * as vault from '../external/vault';
+import * as vault from '../external/vault.js';
 
 export interface AppConfig {
 	// Express
@@ -68,9 +68,9 @@ const buildAppContext = async (secrets: any): Promise<AppConfig> => {
 		},
 
 		corsAllowedOrigins(): string[] {
-			return process.env.CORS_ALLOWED_ORIGINS
-				? process.env.CORS_ALLOWED_ORIGINS.split(',').map((origin) => origin.trim())
-				: [];
+			return process.env.CORS_ALLOWED_ORIGINS ?
+					process.env.CORS_ALLOWED_ORIGINS.split(',').map((origin) => origin.trim())
+				:	[];
 		},
 
 		mongoHost(): string {

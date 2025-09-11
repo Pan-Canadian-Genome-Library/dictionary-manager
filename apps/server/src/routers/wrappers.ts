@@ -18,7 +18,7 @@
  */
 
 import { RequestHandler } from 'express';
-import { authAdminMiddleware } from '../middleware/auth';
+import { authAdminMiddleware } from '../middleware/auth.js';
 
 /**
  * Decorator to handle errors from async express route handlers

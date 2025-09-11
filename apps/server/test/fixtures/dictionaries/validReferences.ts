@@ -18,7 +18,7 @@
  */
 
 import { Dictionary } from '@overture-stack/lectern-dictionary';
-import referencesSchema, { references } from '../schemas/references';
+import referencesSchema, { references } from '../schemas/references.js';
 const dictionary: Dictionary = {
 	name: 'Valid References Dictionary',
 	version: '1.0',

@@ -17,8 +17,9 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 import { Router } from 'express';
-import * as dictionaryController from '../controllers/dictionaryController';
-import { wrapAsync, wrapAsyncAuth } from './wrappers';
+import * as dictionaryController from '../controllers/dictionaryController.js';
+import { wrapAsync, wrapAsyncAuth } from './wrappers.js';
+import { authAdminMiddleware } from '../middleware/auth.js';
 
 const router = Router();
 

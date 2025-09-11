@@ -27,11 +27,11 @@ import {
 	VersionUtils,
 } from '@overture-stack/lectern-dictionary';
 import * as immer from 'immer';
-import { omit } from 'lodash';
-import logger from '../config/logger';
-import * as DictionaryRepo from '../db/dictionary';
-import { validateDictionarySchema } from '../services/schemaService';
-import type { DictionaryDocument, DictionaryDocumentSummary } from '../db/dbTypes';
+import { omit } from 'lodash-es';
+import logger from '../config/logger.js';
+import { default as DictionaryRepo } from '../db/dictionary.js';
+import { validateDictionarySchema } from '../services/schemaService.js';
+import type { DictionaryDocument, DictionaryDocumentSummary } from '../db/dbTypes.js';
 
 /**
  * Get latest version for all dictionaries with the provided name
@@ -200,9 +200,10 @@ export const updateSchema = async (id: string, schema: Schema, major: boolean): 
 	schemas.push(schema);
 
 	// Increment Version
-	const nextVersion = major
-		? VersionUtils.incrementMajor(existingDictionary.version)
-		: VersionUtils.incrementMinor(existingDictionary.version);
+	const nextVersion =
+		major ?
+			VersionUtils.incrementMajor(existingDictionary.version)
+		:	VersionUtils.incrementMinor(existingDictionary.version);
 	const updatedDictionary = immer.produce(existingDictionary, (draft) => {
 		const filteredSchemas = draft.schemas.filter((s) => !(s['name'] === schema['name']));
 		draft.schemas = [...filteredSchemas, schema];

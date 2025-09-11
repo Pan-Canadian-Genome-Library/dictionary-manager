@@ -28,7 +28,7 @@ import {
 } from '@overture-stack/lectern-dictionary';
 import { Request, Response } from 'express';
 import JSZip from 'jszip';
-import * as dictionaryService from '../services/dictionaryService';
+import * as dictionaryService from '../services/dictionaryService.js';
 
 export const listDictionaries = async (
 	req: Request<{}, {}, {}, Partial<{ name: string; version: string; references: string }>>,

@@ -18,19 +18,38 @@
  */
 
 import chai, { expect } from 'chai';
-import 'chai-http';
+import chaiHttp from 'chai-http';
 import 'mocha';
 import mongoose from 'mongoose';
 import { Response } from 'superagent';
-import { GenericContainer } from 'testcontainers';
-import { StartedTestContainer } from 'testcontainers/dist/test-container';
-import App from '../../src/app';
-import { AppConfig } from '../../src/config/appConfig';
-import { constructTestUri } from '../../src/utils/mongo';
-import createDictionaryFixture from './fixtures/createDictionary.json';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { GenericContainer, StartedTestContainer } from 'testcontainers';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+import App from '../../src/app.js';
+import { AppConfig } from '../../src/config/appConfig.js';
+import { constructTestUri } from '../../src/utils/mongo.js';
+
+const createKeyValueFixture = JSON.parse(readFileSync(join(__dirname, './fixtures/createKeyValue.json'), 'utf8'));
+const createKeyValueBadFixture = JSON.parse(readFileSync(join(__dirname, './fixtures/createKeyValueBad.json'), 'utf8'));
+const createDictionaryFixture = JSON.parse(readFileSync(join(__dirname, './fixtures/createDictionary.json'), 'utf8'));
+const updateNewFileFixture = JSON.parse(readFileSync(join(__dirname, './fixtures/updateNewFile.json'), 'utf8'));
+const newFileFixture = JSON.parse(readFileSync(join(__dirname, './fixtures/newFile.json'), 'utf8'));
+const createKeyValueBadReferenceValueTypeFixture = JSON.parse(
+	readFileSync(join(__dirname, './fixtures/createKeyValueBadReferenceValueType.json'), 'utf8'),
+);
+const createKeyValueBadUnknownReferenceFixture = JSON.parse(
+	readFileSync(join(__dirname, './fixtures/createKeyValueBadUnknownReference.json'), 'utf8'),
+);
+const createKeyValueBadReferenceFormatFixture = JSON.parse(
+	readFileSync(join(__dirname, './fixtures/createKeyValueBadReferenceFormat.json'), 'utf8'),
+);
 
 const CORS_ALLOWED_DOMAINS = [`http://localhost:5173`, `https://example.com`];
-
 
 const testConfig: AppConfig = {
 	serverPort(): string {
@@ -73,7 +92,7 @@ const testConfig: AppConfig = {
 const app = App(testConfig);
 let container: StartedTestContainer;
 
-chai.use(require('chai-http'));
+chai.use(chaiHttp);
 
 describe('Dictionary Routes', () => {
 	before(async () => {
@@ -167,7 +186,7 @@ describe('Dictionary Routes', () => {
 			chai
 				.request(app)
 				.post('/dictionaries')
-				.send(require('./fixtures/createKeyValue.json'))
+				.send(createKeyValueFixture)
 				.end((err: Error, res: Response) => {
 					expect(err).to.be.null;
 					expect(res).to.have.status(200);
@@ -176,7 +195,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should 400 with meta fields that are arrays of objects', (done: Mocha.Done) => {
-			const dictRequest = require('./fixtures/createKeyValueBad.json');
+			const dictRequest = createKeyValueBadFixture;
 			chai
 				.request(app)
 				.post('/dictionaries')
@@ -189,7 +208,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should 400 with a codeList reference that is not properly formatted', (done: Mocha.Done) => {
-			const dictRequest = require('./fixtures/createKeyValueBadReferenceFormat.json');
+			const dictRequest = createKeyValueBadReferenceFormatFixture;
 			chai
 				.request(app)
 				.post('/dictionaries')
@@ -202,7 +221,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should 400 with a reference that is unknown', (done: Mocha.Done) => {
-			const dictRequest = require('./fixtures/createKeyValueBadUnknownReference.json');
+			const dictRequest = createKeyValueBadUnknownReferenceFixture;
 			chai
 				.request(app)
 				.post('/dictionaries')
@@ -215,7 +234,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should 400 with a reference that provides an illegal value', (done: Mocha.Done) => {
-			const dictRequest = require('./fixtures/createKeyValueBadReferenceValueType.json');
+			const dictRequest = createKeyValueBadReferenceValueTypeFixture;
 			chai
 				.request(app)
 				.post('/dictionaries')
@@ -235,7 +254,7 @@ describe('Dictionary Routes', () => {
 		let id: string;
 
 		before((done: Mocha.Done) => {
-			const dictRequest = require('./fixtures/createDictionary.json');
+			const dictRequest = createDictionaryFixture;
 			dictRequest.version = testVersion;
 			chai
 				.request(app)
@@ -331,7 +350,7 @@ describe('Dictionary Routes', () => {
 		let nextId: string;
 
 		before((done: Mocha.Done) => {
-			const dictRequest = require('./fixtures/createDictionary.json');
+			const dictRequest = createDictionaryFixture;
 			dictRequest.name = 'updateTest';
 			dictRequest.version = testVersion;
 			chai
@@ -345,7 +364,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should successfully add a schema to a dictionary and increment to next major version', (done: Mocha.Done) => {
-			const newFile = require('./fixtures/newFile.json');
+			const newFile = newFileFixture;
 			chai
 				.request(app)
 				.post(`/dictionaries/${id}/schemas`)
@@ -360,7 +379,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should successfully update a schema in a dictionary and increment to next minor version', (done: Mocha.Done) => {
-			const newFile = require('./fixtures/updateNewFile.json');
+			const newFile = updateNewFileFixture;
 			chai
 				.request(app)
 				.put(`/dictionaries/${nextId}/schemas`)
@@ -375,7 +394,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should successfully update a schema in a dictionary and increment to next major version', (done: Mocha.Done) => {
-			const newFile = require('./fixtures/updateNewFile.json');
+			const newFile = updateNewFileFixture;
 			chai
 				.request(app)
 				.put(`/dictionaries/${nextId}/schemas`)
@@ -391,7 +410,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should respond with 404 on poorly formatted dictionary_id', (done: Mocha.Done) => {
-			const newFile = require('./fixtures/updateNewFile.json');
+			const newFile = updateNewFileFixture;
 			chai
 				.request(app)
 				.put(`/dictionaries/kljadsbflsdafsdakljsdfkp/schemas`)
@@ -413,7 +432,7 @@ describe('Dictionary Routes', () => {
 		let nextId: string;
 
 		before((done: Mocha.Done) => {
-			const dictRequest = require('./fixtures/createDictionary.json');
+			const dictRequest = createDictionaryFixture;
 			dictRequest.name = 'updateTest';
 			dictRequest.version = firstVersion;
 			const firstPromise = chai
@@ -424,7 +443,7 @@ describe('Dictionary Routes', () => {
 					id = res.body._id;
 				});
 			firstPromise.then(() => {
-				const sameDict = require('./fixtures/createDictionary.json');
+				const sameDict = createDictionaryFixture;
 				sameDict.name = 'updateTest';
 				sameDict.version = secondVersion;
 				chai
@@ -439,7 +458,7 @@ describe('Dictionary Routes', () => {
 		});
 
 		it('Should fail to update file as it is not for latest dictionary version', (done: Mocha.Done) => {
-			const newFile = require('./fixtures/newFile.json');
+			const newFile = newFileFixture;
 			chai
 				.request(app)
 				.post(`/dictionaries/${id}/schemas`)
