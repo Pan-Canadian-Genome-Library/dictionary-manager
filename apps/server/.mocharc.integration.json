@@ -1,6 +1,10 @@
 {
-	"extension": ["ts"],
-	"require": "ts-node/register",
+	"extension": [
+		"ts"
+	],
+	"node-option": [
+		"import=tsx"
+	],
 	"spec": "test/integration/**/*.spec.ts",
 	"timeout": 35000
 }
