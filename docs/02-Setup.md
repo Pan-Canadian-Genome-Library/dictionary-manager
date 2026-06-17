@@ -123,7 +123,6 @@ docker run --name lectern-mongo \
    **Authentication/Authorization (Optional)**
    - `AUTH_ENABLED`: Enable JWT-based authorization (default: false)
    - `AUTHZ_ENDPOINT`: AUTHZ API URL for authorization
-   - `AUTHZ_GROUP_ADMIN`: User group for administrators
    - `AUTH_PROVIDER_HOST`: Authentication API URL (CILogon)
    - `AUTH_CLIENT_ID`: Authentication client Id
    - `AUTH_CLIENT_SECRET`: Authentication secret

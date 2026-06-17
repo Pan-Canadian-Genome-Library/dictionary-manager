@@ -137,7 +137,7 @@ export const fetchUserData = async (token: string) => {
 		const userTokenInfo = {
 			user: {
 				username: `${responseValidation.data.userinfo.pcgl_id}`,
-				isAdmin: isAdmin({ groups: responseValidation.data.groups }),
+				isAdmin: responseValidation.data.userinfo.data_admin,
 				allowedWriteOrganizations: responseValidation.data.study_authorizations.editable_studies,
 				groups: extractUserGroups({ groups: responseValidation.data.groups }),
 			},
@@ -148,16 +148,6 @@ export const fetchUserData = async (token: string) => {
 		logger.error(`[AUTHZ]: An error occurred with the response objected returned from authz. ${error}`);
 		throw new InternalServerError('Something went wrong with the authz service');
 	}
-};
-
-/**
- * @param groups List of groups users belongs to
- * @returns boolean if user has admin group
- */
-const isAdmin = ({ groups }: Groups): boolean => {
-	const { AUTHZ_GROUP_ADMIN } = authConfig;
-
-	return groups.some((val) => val.name === AUTHZ_GROUP_ADMIN);
 };
 
 /**
